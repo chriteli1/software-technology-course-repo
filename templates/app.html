@@ -1,0 +1,60 @@
+<html>
+
+<head>
+
+	<style>
+
+		body {
+            background-image: url('https://www.in.gr/wp-content/uploads/2022/03/seismos-seismografos.jpg'), radial-gradient(circle, white 5%, lightgrey 47.5%, grey 47.5%);
+            background-size: 100% 100%;
+            background-blend-mode: lighten;
+		}
+
+
+        .button {
+              border: none;
+              color: white;
+              padding: 15px 32px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 16px;
+              margin: 4px 2px;
+              cursor: pointer;
+            }
+
+        .button1 {background-color: #4CAF50;} /* Green */
+        .button2 {background-color: #008CBA;} /* Blue */
+
+		#title {
+			justify-content: center;
+			text-align: center;
+			position: relative;
+			top: 30%;
+			color: Black;
+			font-size: 200%;
+		}
+
+
+        #route {
+            justify-content: center;
+			text-align: center;
+			position: relative;
+			top: 40%;
+			padding: 20px;
+
+        }
+
+
+	</style>
+</head>
+<body>
+
+	<div id="title"> Earthquakes </div>
+	<div id="route"> Where do you want to go? <br><br>
+        <button class="button button1" onclick="location.href='http://localhost:5000/home';">Front End</button> <br><br>
+        <button class="button button2" onclick="location.href='http://localhost:5000/upload';">Back End</button>
+    </div>
+</body>
+
+</html>
