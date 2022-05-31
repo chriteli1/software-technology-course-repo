@@ -1,37 +1,36 @@
-from urllib.request import urlopen
-from flask import Flask, request, render_template, Blueprint, redirect
+from flask import Flask, request
 import mysql.connector
-import json
-import requests
-from flask_restful import Resource, Api
 
 
-api = Blueprint('api', __name__, template_folder='templates')
+app = Flask(__name__)
+
+mydb = mysql.connector.connect(host="dalab.ee.duth.gr", user="s57341", password="114682", database="s57341")
+mycursor = mydb.cursor()
 
 #BackEnd connection
-@api.route('/dataReceived', methods=['POST', 'GET'])
+@app.route('/api/import/', methods=['POST'])
 def dataReceived():
-    if request.method == 'POST':
-        magnitude = request.form['mag']
-        magnitude_final = magnitude.replace("[", "")
-        magnitude_final = magnitude_final.replace("]", "")
-        magnitude_final = magnitude_final.split(",")
-        mag_float = float(magnitude_final[1])
-        print(mag_float)
-        print(type(mag_float))
-        # sql="insert into blah(magnitude) values(%s)"
-        # val=[(magnitude)]
-        # #mycursor.execute("INSERT INTO quake(magnitude) VALUES (%s));".format(magnitude))
-        # mycursor.execute(sql,val)
-        # mydb.commit()
-        return "Success!"
+    magnitude = float(request.args['mag'])
+    place = request.args['place']
+    time = request.args['time']
+    flag = int(request.args['flag']) #Is equal to 0 if db is not empty and 1 if it is
+    eq_id = "123t"
+    #=====Empty table if new json is uploaded=====#
+    if flag == 0:
+        sql0 = "truncate table earthquakes"
+        mycursor.execute(sql0)
+        mydb.commit()
+    # ============================================#
+
+    #=====Send new data=====#
+    sql = "insert into earthquakes (mag, place, time, eq_id) values(%s, %s, %s, %s)"
+    val = (magnitude, place, time, eq_id)
+    mycursor.execute(sql, val)
+    mydb.commit()
+    # ======================#
+
+    return "Success!"
 
 
-#FrontEnd connection
-@api.route('/userDataReceived', methods=['POST'])
-def userDataReceived():
-    if request.method == 'POST':
-        minMag = request.form['minMag']
-        maxMag = request.form['maxMag']
-        #Get data from database
-    return render_template("search.html")
+if __name__ == '__main__':
+    app.run(debug=True)
