@@ -1,49 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earthquakes</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/slider.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
-  </head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Earthquakes</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/slider.css') }}">
+    </head>
 
-  <body>
-    <div class="container">
+    <body>
 
-      <h1>Earthquakes</h1>
+        <div class="content">
 
-      <form id="form" action="/search">
-        <div class="mag-input">
-          <label id="mag-label">Magnitude:</label>
-          <div class="mag-slider">
-            <div id="min-mag-val"></div>
-            <div id="max-mag-val"></div>
-            <div class="slider-track"></div>
-            <input name="minMag" type="range" min="-1" max="10" step="0.5" value="-1" id="slider-1" oninput="slideMin()">
-            <input name="maxMag" type="range" min="-1" max="10" step="0.5" value="10" id="slider-2" oninput="slideMax()">
-          </div>
+            <div class="title-section">
+                <h1 class="main-title">Earthquakes</h1>
+            </div>
+
+            <div class="search-section">
+
+                <form id="s-by-mag" action="/results">
+                    <label for="mag-input">Search by Magnitude</label>
+                    <div class="wrapper">
+                        <div class="values">
+                            <span id="range1"> 0 </span>
+                            <span> - </span>
+                            <span id="range2"> 10 </span>
+                        </div>
+                        <div class="container">
+                            <div class="slider-track"></div>
+                            <input name="minMag" type="range" min="0" max="10" step="0.5" value="0" id="slider-1"
+                                oninput="slideOne()">
+                            <input name="maxMag" type="range" min="0" max="10" step="0.5" value="10" id="slider-2"
+                                oninput="slideTwo()">
+                        </div>
+                    </div>
+                    <input type="submit" value="Search">
+                </form>
+
+                <form id="s-by-loc" action="/results">
+                    <label for="loc-input">Search by Location</label>
+                    <input id="loc-input" type="text" name="location" placeholder="Location" required>
+                    <input type="submit" value="Search">
+                </form>
+
+                <form id="s-by-tim" action="/results">
+                    <label for="tim-input">Search by Date</label>
+
+                    <div class="wrapper">
+                        <div class="container">
+                            <input id="min-tim-input" type="date" name="minDate" required>
+                            <span> - </span>
+                            <input id="max-tim-input" type="date" name="maxDate" required>
+                        </div>
+                    </div>
+
+                    <input type="submit" value="Search">
+                </form>
+
+            </div>
+
         </div>
 
-        <div class="location-input">
-          <label for="location">Location: </label>
-          <input type="text" id="location" name="loc" placeholder="Location">
-        </div>
+        <script src="{{ url_for('static', filename='js/slider.js') }}"></script>
 
-        <div class="date-input">
-          <label for="date">Date: </label>
-          <input name="date" type="date" id="date" lang="">
-        </div>
-
-        <input type="submit" value="Search">
-      </form>
-    </div>
-
-    <!-- <script src="js/script.js"></script> -->
-    <script src="{{ url_for('static', filename='js/slider.js') }}"></script>
-  </body>
+    </body>
 
 </html>

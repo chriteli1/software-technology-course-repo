@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Results</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/results.css') }}">
+    </head>
+
+    <body>
+
+        <div class="content">
+
+            <div class="title-section">
+                <h1 class="main-title">Results</h1>
+                <a id="new-search-button" href="{{ url_for('index') }}">New Search</a>
+            </div>
+
+            <div class="table-section">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="id-col">#</th>
+                            <th class="loc-col">Location</th>
+                            <th class="mag-col">Magnitude</th>
+                            <th class="date-col">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody class="eq-entries">
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <script src="{{ url_for('static', filename='js/results.js') }}"></script>
+    
+    </body>
+
+</html>
