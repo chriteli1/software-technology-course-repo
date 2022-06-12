@@ -1,0 +1,135 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: 0;
+}
+
+.content {
+    opacity: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title-section {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-title {
+    font-size: 5rem;
+    font-weight: 800;
+    color: #000;
+}
+
+#new-search-button {
+    display: block;
+    background: linear-gradient(to right, #ede23a, #a2af39, #985099);
+    width: 30%;
+    height: 45px;
+    border-radius: 40px;
+    text-align: center;
+    line-height: 45px;
+    outline: none;
+    cursor: pointer;
+    font-size: 1.4rem;
+    font-weight: 800;
+    border: none;
+    color: #000;
+    text-decoration: none;
+}
+
+#new-search-button:hover {
+    filter: brightness(0.9);
+}
+
+.table-section {
+    overflow-y: scroll;
+    width: 80%;
+    margin-top: 30px;
+}
+
+table {
+    width: 100%;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+thead {
+    position: sticky;
+    top: 0px;
+    background: linear-gradient(to right, #ede23a, #a2af39, #985099);
+}
+
+td,
+th {
+    border-left: 1px solid #000;
+    text-align: left;
+    padding: 8px;
+    vertical-align: middle;
+}
+
+.id-col {
+    width: 30px;
+    text-align: center;
+    border: 0;
+}
+
+.mag-col {
+    width: 100px;
+    text-align: center;
+}
+
+.date-col {
+    width: 180px;
+    text-align: center;
+}
+
+
+tr:nth-child(even) {
+    background: #e0e0e0;
+}
+
+tbody tr:hover {
+    background: #bdbdbd;
+}
+
+/* for custom scrollbar for webkit browser*/
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #7f7f7f;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #5a5959;
+}
+
+/* LOADING ANIMATION */
+.animation-box {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.no-eq-msg {
+    position: absolute;
+    font-size: 2rem;
+    font-weight: 800;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
