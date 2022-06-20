@@ -25,7 +25,6 @@ def dataReceived():
     place = request.args['place']
     time = request.args['time']
     flag = int(request.args['flag']) #Is equal to 0 if db is not empty and 1 if it is
-    eq_id = "123t"
     #=====Empty table if new json is uploaded=====#
     if flag == 0:
         sql0 = "truncate table earthquakes"
@@ -34,8 +33,8 @@ def dataReceived():
     # ============================================#
 
     #=====Send new data=====#
-    sql = "insert into earthquakes (mag,place,time,eq_id) values(%s,%s,%s,%s)"
-    val = (magnitude, place, time, eq_id)
+    sql = "insert into earthquakes (mag,place,time) values(%s,%s,%s)"
+    val = (magnitude, place, time)
     mycursor.execute(sql, val)
     mydb.commit()
     # ======================#
@@ -69,9 +68,8 @@ def significant_magnitude(min, max):
 
 @app.route('/location/<string:loc>')
 def location(loc):
-    c = "SELECT mag, place, time FROM earthquakes WHERE place = %s"
-    d = [loc]
-    mycursor.execute(c, d)
+    c = "SELECT mag, place, time FROM earthquakes WHERE place LIKE '%" + loc + "%'"
+    mycursor.execute(c)
     myresult = mycursor.fetchall()
     earthquakes = []
     content = {}
@@ -105,5 +103,3 @@ def date(min, max):
 
 if __name__ == '__main__':
     app.run(port=5000)
-
-
