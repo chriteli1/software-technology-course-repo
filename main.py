@@ -41,16 +41,20 @@ def dataReceived():
 
     return "Success!"
 
+#Search by magnitude
 @app.route('/significant_magnitude/<float:min>&<float:max>', methods=['GET'])
 def significant_magnitude(min, max):
     if request.method == 'GET':
         min = float(min)
         max = float(max)
         if min < max:
+    #===== Bring data from db with SQL command =====#
             a = "SELECT mag, place, time FROM earthquakes WHERE mag >= %s AND mag <= %s "
             b = (min, max)
             mycursor.execute(a, b)
             myresult = mycursor.fetchall()
+    #===============================================#
+    #===== Format data to give to frontend =====#        
             earthquakes = []
             content = {}
             for rv in myresult:
@@ -60,39 +64,48 @@ def significant_magnitude(min, max):
             return jsonify(earthquakes)
         else:
             print("min prepei na exei mikrotero value apo to max")
+    #===========================================#
     return
 
 
 #significant_magnitude(4.0, 6.0)
 
-
+#Search by location
 @app.route('/location/<string:loc>')
 def location(loc):
+    #===== Bring data from db with SQL command =====#
     c = "SELECT mag, place, time FROM earthquakes WHERE place LIKE '%" + loc + "%'"
     mycursor.execute(c)
     myresult = mycursor.fetchall()
+    #===============================================#
+    #===== Format data to give to frontend =====# 
     earthquakes = []
     content = {}
     for rv in myresult:
         content = {'mag': rv[0], 'place': rv[1], 'date': rv[2]}
         earthquakes.append(content)
+    #===========================================#
     return jsonify(earthquakes)
 
 
 #location('55 km WSW of Masachapa, Nicaragua')
 
-
+#Search by date
 @app.route('/date/<string:min>&<string:max>')
 def date(min, max):
-    e = "SELECT mag, place, time FROM earthquakes WHERE time >= %s AND time <= %s"
+    #===== Bring data from db with SQL command =====#
+    e = "SELECT mag, place, time FROM earthquakes WHERE time >= %s AND time <= %s" #SQL command to bring data from db
     f = (min, max)
     mycursor.execute(e, f)
     myresult = mycursor.fetchall()
+    #===============================================#
+    #===== Format data to give to frontend =====# 
     earthquakes = []
     content = {}
     for rv in myresult:
         content = {'mag': rv[0], 'place': rv[1], 'date': rv[2]}
         earthquakes.append(content)
+    #===========================================#
     return jsonify(earthquakes)
 
 
