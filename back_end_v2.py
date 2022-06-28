@@ -20,7 +20,7 @@ def uploader():
         with urlopen(f) as response:
             source = response.read()
         data = json.loads(source) #The data in json format
-        is_db_empty = 0
+        is_db_empty = 0 #Variable to tell the api to empty the db if a new json is uploaded
         for x in data['features']:
             mag = x['properties']['mag']
             place = x['properties']['place']
